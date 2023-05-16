@@ -4,12 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.FlowPane?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.syazwan.timetrackersystem.DashboardController">
     <children>
         <TilePane alignment="CENTER" layoutX="24.0" layoutY="26.0" prefHeight="351.0" prefWidth="202.0" style="-fx-background-color: #CCCCCC;">
@@ -28,13 +26,12 @@
                 <Font size="16.0" />
             </font>
         </Label>
-        <Button layoutX="516.0" layoutY="272.0" mnemonicParsing="false" text="New" />
         <ListView layoutX="236.0" layoutY="306.0" orientation="HORIZONTAL" prefHeight="75.0" prefWidth="345.0" />
         <Label layoutX="238.0" layoutY="26.0" text="Job">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-      <FlowPane fx:id="jobList" layoutX="238.0" layoutY="51.0" vgap="10"  hgap="10" prefHeight="200.0" prefWidth="345.0" />
+      <FlowPane fx:id="jobList" hgap="10" layoutX="238.0" layoutY="51.0" prefHeight="200.0" prefWidth="345.0" vgap="10" />
     </children>
 </AnchorPane>
