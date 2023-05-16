@@ -6,6 +6,7 @@ module com.syazwan.timetrackersystem {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
     opens com.syazwan.timetrackersystem to javafx.fxml;
     exports com.syazwan.timetrackersystem;

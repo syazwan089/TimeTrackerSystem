@@ -1,17 +1,20 @@
 package com.syazwan.timetrackersystem;
 import com.syazwan.timetrackersystem.model.JobTrack;
-import com.syazwan.timetrackersystem.model.ParameterizedButton;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-import java.io.Console;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,14 +27,14 @@ public class DashboardController {
     @FXML
     private FlowPane jobList;
 
-    ObservableList<JobTrack> jobTrackList = FXCollections.observableArrayList(new JobTrack("Designing",new Date()));
+    ObservableList<JobTrack> jobTrackList =  FXCollections.observableArrayList();
     public void initialize() {
         // Update the time label every second
         Thread clockThread = new Thread(this::runClock);
         clockThread.setDaemon(true);
         clockThread.start();
 
-        UpdateJobUi();
+       // UpdateJobUi();
 
 
 
@@ -55,7 +58,32 @@ public class DashboardController {
     }
     @FXML
     public void onStartJobBtn(ActionEvent actionEvent) {
-        jobTrackList.add(new JobTrack("Coding",new Date()));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("newJobForm.fxml"));
+            AnchorPane form = loader.load();
+
+            // Create a new stage for the popup form
+            Stage formStage = new Stage();
+            formStage.initModality(Modality.APPLICATION_MODAL);
+            formStage.setTitle("Start Job");
+            formStage.setResizable(false);
+            Scene scene = new Scene(form);
+            formStage.setScene(scene);
+
+            // Set the controller for the popup form
+            newJobFormController formController = loader.getController();
+            formController.setDashboardController(this); // Pass a reference to the DashboardController
+
+            // Show the form
+            formStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public  void addNewJob(String jobN,int intJ)
+    {
+        jobTrackList.add(new JobTrack(jobN,new Date(), intJ));
         UpdateJobUi();
     }
 

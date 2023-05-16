@@ -1,5 +1,7 @@
 package com.syazwan.timetrackersystem.model;
 
+import com.syazwan.timetrackersystem.Utility.ScreenShotObj;
+
 import java.security.PublicKey;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -13,13 +15,14 @@ public class JobTrack {
     private Date startDate;
     private Date endDate;
     private String totalHour;
-
+    ScreenShotObj screenShotObjMain;
     private boolean isStop;
 
-    public JobTrack(String _jobName,Date _startDate){
+    public JobTrack(String _jobName,Date _startDate, int interval){
         this.jobName = _jobName;
         this.startDate = _startDate;
         isStop = false;
+        StartScreenShot(interval);
     }
 
 
@@ -71,5 +74,18 @@ public class JobTrack {
     {
         this.endDate = _date;
         isStop = true;
+        screenShotObjMain.stop();
+        screenShotObjMain = null;
+    }
+
+    public  void StartScreenShot(int intrvl)
+    {
+        if(intrvl == 0)
+        {
+            return;
+        }
+        System.out.println("Start screenshot");
+        screenShotObjMain = new ScreenShotObj(intrvl ,jobName);
+        screenShotObjMain.start();
     }
 }
