@@ -1,4 +1,5 @@
 package com.syazwan.timetrackersystem;
+import com.syazwan.timetrackersystem.model.ImageLoader;
 import com.syazwan.timetrackersystem.model.JobTrack;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -9,15 +10,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class DashboardController {
@@ -26,7 +34,10 @@ public class DashboardController {
 
     @FXML
     private FlowPane jobList;
+    @FXML
+    private VBox imgBox;
 
+    private ExecutorService executorService;
     ObservableList<JobTrack> jobTrackList =  FXCollections.observableArrayList();
     public void initialize() {
         // Update the time label every second
@@ -112,6 +123,7 @@ public class DashboardController {
             }
 
         }
+        getImage();
     }
 
 
@@ -145,5 +157,33 @@ public class DashboardController {
 
         }
     }
+
+
+    public void getImage()
+    {
+        ImageLoader imageLoader = new ImageLoader();
+        executorService = Executors.newCachedThreadPool();
+        System.out.println("img loaded");
+        executorService.submit(() -> {
+            List<File> imageFiles = imageLoader.getImageFilesFromFolder();
+
+            List<Image> images = new ArrayList<>();
+            for (File imageFile : imageFiles) {
+                Image image = new Image(imageFile.toURI().toString());
+                images.add(image);
+                System.out.println(imageFile.getName());
+            }
+
+            for (Image image : images) {
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(200);
+                imageView.setPreserveRatio(true);
+                imgBox.getChildren().add(imageView);
+
+            }
+        });
+    }
+
+
 
 }

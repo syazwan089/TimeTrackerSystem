@@ -2,15 +2,15 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.syazwan.timetrackersystem.DashboardController">
+<AnchorPane prefHeight="477.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.syazwan.timetrackersystem.DashboardController">
     <children>
-        <TilePane alignment="CENTER" layoutX="24.0" layoutY="26.0" prefHeight="351.0" prefWidth="202.0" style="-fx-background-color: #CCCCCC;">
+        <TilePane alignment="CENTER" layoutX="24.0" layoutY="26.0" prefHeight="427.0" prefWidth="202.0" style="-fx-background-color: #CCCCCC;">
             <children>
                 <Label fx:id="currentTime" alignment="TOP_CENTER" contentDisplay="CENTER" text="Currrent time" textAlignment="JUSTIFY" />
                 <Label fx:id="clockTxt" contentDisplay="CENTER" layoutX="97.0" layoutY="102.0" text="" textAlignment="CENTER">
@@ -21,17 +21,17 @@
                 <Button mnemonicParsing="false" onAction="#onStartJobBtn" text="START" />
             </children>
         </TilePane>
-        <Label layoutX="239.0" layoutY="272.0" text="Countdown">
-            <font>
-                <Font size="16.0" />
-            </font>
-        </Label>
-        <ListView layoutX="236.0" layoutY="306.0" orientation="HORIZONTAL" prefHeight="75.0" prefWidth="345.0" />
         <Label layoutX="238.0" layoutY="26.0" text="Job">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
       <FlowPane fx:id="jobList" hgap="10" layoutX="238.0" layoutY="51.0" prefHeight="200.0" prefWidth="345.0" vgap="10" />
+        <Label layoutX="238.0" layoutY="267.0" text="Screenshot">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+      <VBox fx:id="imgBox" layoutX="238.0" layoutY="298.0" prefHeight="154.0" prefWidth="345.0" />
     </children>
 </AnchorPane>
